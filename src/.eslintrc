@@ -1,0 +1,143 @@
+{
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:prettier/recommended",
+		"plugin:import/errors",
+		"plugin:import/warnings",
+		"prettier/standard",
+		"prettier/react"
+	],
+	"settings": {
+		"import/resolver": {
+			"alias": {
+        "map": [
+					["@src", "./src"]
+				],
+        "extensions": [".js", ".jsx"]
+			}
+		},
+		"react": {
+			"createClass": "createReactClass",
+			"pragma": "React",
+			"version": "16.13"
+		},
+		"propWrapperFunctions": []
+	},
+	"plugins": [
+		"react",
+		"react-hooks",
+		"import",
+		"prettier",
+		"babel"
+	],
+	"parser": "babel-eslint",
+	"parserOptions": {
+		"ecmaVersion": 2019,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"legacyDecorators": true,
+			"jsx": true
+		}
+	},
+	"env": {
+		"es6": true,
+		"browser": true,
+		"node": true,
+		"mocha": true
+	},
+	"rules": {
+		"max-len": [
+			"warn",
+			{
+				"code": 120
+			}
+		],
+		"quotes": [
+			2,
+			"single"
+		],
+		"no-console": 0,
+		"no-debugger": 1,
+		"no-var": 2,
+		"semi": [
+			2,
+			"always"
+		],
+		"no-unused-vars": [
+			1,
+			{
+				"args": "none",
+				"argsIgnorePattern": "^_",
+				"vars": "local",
+				"varsIgnorePattern": "^_"
+			}
+		],
+		"key-spacing": [
+			"error",
+			{
+				"mode": "minimum",
+				"beforeColon": false,
+				"afterColon": true
+			}
+		],
+		"array-bracket-spacing": [
+			2,
+			"never"
+		],
+		"object-curly-spacing": [
+			2,
+			"always"
+		],
+		"no-trailing-spaces": 0,
+		"eol-last": 2,
+		"no-multiple-empty-lines": [
+			2,
+			{
+				"max": 2,
+				"maxEOF": 0
+			}
+		],
+		"indent": [
+			0,
+			2,
+			{
+				"SwitchCase": 1
+			}
+		],
+		"no-underscore-dangle": "off",
+		"no-alert": "off",
+		"no-lone-blocks": 0,
+		"jsx-quotes": 1,
+		"import/newline-after-import": [
+			"error",
+			{
+				"count": 1
+			}
+		],
+		"react/prop-types": [
+			0,
+			{
+				"ignore": [
+					"classes",
+					"children",
+					"props.children"
+				]
+			}
+		],
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "warn",
+		"prettier/prettier": "warn",
+		"no-shadow": [
+			"error",
+			{
+				"builtinGlobals": false,
+				"hoist": "never",
+				"allow": []
+			}
+		],
+		"no-shadow-restricted-names": "error",
+		"no-prototype-builtins": "off"
+	},
+	"globals": {}
+}
