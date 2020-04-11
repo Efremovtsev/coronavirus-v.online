@@ -50,16 +50,17 @@ function* getDataHandler(action) {
     const recovered = recoveredCountryData.reduce((res, c) => res + c.recovered, 0);
     const deaths = deathsCountryData.reduce((res, c) => res + c.deaths, 0);
 
-    countriesData.push({
-      id: iso2,
-      name,
-      iso3: iso3,
-      iso2: iso2,
-      confirmed,
-      recovered,
-      deaths,
-      active: confirmed - recovered - deaths,
-    });
+    iso2 &&
+      countriesData.push({
+        id: iso2,
+        name,
+        iso3: iso3,
+        iso2: iso2,
+        confirmed,
+        recovered,
+        deaths,
+        active: confirmed - recovered - deaths,
+      });
   });
 
   yield put(setTableData(countriesData));

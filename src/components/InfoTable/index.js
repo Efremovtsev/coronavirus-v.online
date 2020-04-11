@@ -101,8 +101,7 @@ function EnhancedTableHead(props) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: '#181a1f',
-    color: '#d3ddef',
+    width: '100%',
   },
   paper: {
     background: '#181a1f',

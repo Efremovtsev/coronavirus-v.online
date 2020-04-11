@@ -2,11 +2,10 @@ import React, { memo } from 'react';
 
 function Loader() {
   return (
-    <div style={{ position: 'relative', top: '50%' }}>
+    <div className="loader">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
-        style={{ margin: 'auto', display: 'block', shapeRendering: 'auto' }}
         width="300px"
         height="300px"
         viewBox="0 0 100 100"

@@ -40,47 +40,37 @@ function Countries({
         )} per million / ${countryData.deaths} deaths / ${countryData.recovered} recovered / ${
           countryData.confirmed
         } confirmed</span>`;
-        let countryColor;
+        let countryColor = '0';
         for (let i = 1; i < activePercent.length; i++) {
           if (countryPercent > activePercent[i - 1] && countryPercent <= activePercent[i]) {
-            countryColor = activeColor[i - 1];
+            // countryColor = activeColor[i - 1];
+            countryColor = i - 1;
           }
         }
         if (countryPercent >= activePercent[activePercent.length - 1])
-          countryColor = activeColor[activeColor.length - 1];
+          // countryColor = activeColor[activeColor.length - 1];
+          countryColor = activeColor.length - 1;
 
         el.innerHTML = description;
 
         for (let i = 1; i < recoveredPercent.length; i++) {
           if (countryRecPercent > recoveredPercent[i - 1] && countryRecPercent <= recoveredPercent[i]) {
-            countryColor = recoveredColor[i - 1];
+            countryColor = i - 1 + 10;
           }
         }
         if (countryRecPercent >= recoveredPercent[recoveredPercent.length - 1]) {
-          countryColor = recoveredColor[recoveredColor.length - 1];
+          countryColor = recoveredColor.length - 1 + 10;
         }
         if (selected === countryData.iso2) {
-          countryColor = '#FF9966';
+          // countryColor = '#FF9966';
           el.setAttribute('data-active', 'active');
         } else {
           el.setAttribute('data-active', '');
         }
-        // if (selected) {
-        //   const tooltipXY = el.getBoundingClientRect();
-        //   tooltip.innerHTML = description;
-        //   tooltip.classList.add('active', 'fixed');
-        //   tooltip.style.left = `${tooltipXY.left}px`;
-        //   tooltip.style.top = `${tooltipXY.top}px`;
-        // }
-        countryColor ? el.setAttribute('fill', countryColor) : el.setAttribute('fill', '#383d46');
+        el.setAttribute('data-color', countryColor);
       } else {
         el.innerHTML = `<span>${el.getAttribute('title')}</span>`;
-        el.setAttribute('fill', '#383d46');
       }
-      el.setAttribute('stroke', '#21252b');
-      el.setAttribute('stroke-opacity', '1');
-      el.setAttribute('stroke-width', 0.5);
-      el.setAttribute('transition', '0.5s');
 
       el.addEventListener('mouseover', (e) => {
         tooltip.innerHTML = el.querySelector('span').innerHTML;
