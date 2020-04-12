@@ -7,6 +7,7 @@ export const getCountries = () => axios.get(`${API_URL}/countries`);
 export const getConfirmed = () => axios.get(`${API_URL}/confirmed`);
 export const getRecovered = () => axios.get(`${API_URL}/recovered`);
 export const getDeaths = () => axios.get(`${API_URL}/deaths`);
+export const getDaily = () => axios.get(`${API_URL}/daily`);
 
 export const getCountry = (iso3) => axios.get(`${API_URL}/countries/${iso3}`);
 

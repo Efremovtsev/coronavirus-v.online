@@ -31,6 +31,7 @@ const dataSlice = createSlice({
     // getRecovered: (state, action) => ({ ...state, isFetching: true }),
     getRecoveredSuccess: (state, action) => ({ ...state, recoveredData: action.payload }),
     getDeathsSuccess: (state, action) => ({ ...state, deathsData: action.payload }),
+    getDailySuccess: (state, action) => ({ ...state, dailyData: action.payload }),
     // getConfirmedFailed: (state, action) => ({ ...initialState, isFetching: false }),
     setTableData: (state, action) => ({ ...state, tableData: action.payload }),
   },
@@ -49,6 +50,7 @@ export const {
   // getRecovered,
   getRecoveredSuccess,
   getDeathsSuccess,
+  getDailySuccess,
   setTableData,
 } = dataSlice.actions;
 

@@ -44,7 +44,7 @@ const createColumns = () => [
   },
   {
     id: 'confirmed',
-    align: 'left',
+    align: 'right',
     label: 'Confirmed',
     render: ({ confirmed }) => formatNumber(confirmed),
   },
@@ -56,7 +56,7 @@ const createColumns = () => [
   // },
   {
     id: 'deaths',
-    align: 'left',
+    align: 'right',
     label: 'Deaths',
     render: ({ deaths }) => formatNumber(deaths),
   },
@@ -103,6 +103,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
+  tableContainer: {
+    maxHeight: '100%',
+    scrollbarWidth: 'none',
+    overflow: 'inherit',
+  },
   paper: {
     background: '#181a1f',
     color: '#d3ddef',
@@ -141,11 +146,17 @@ function InfoTable({ data, selected, setSelected, handleClick }) {
 
   return (
     <div className={classes.root}>
-      <TableContainer>
-        <Table className={classes.table} aria-labelledby="tableTitle" size={'medium'} aria-label="enhanced table">
+      <TableContainer className={classes.tableContainer}>
+        <Table
+          stickyHeader
+          className={classes.table}
+          aria-labelledby="tableTitle"
+          size={'medium'}
+          aria-label="enhanced table"
+        >
           <EnhancedTableHead classes={classes} order={order} orderBy={orderBy} onRequestSort={handleRequestSort} />
           <TableBody>
-            {sortedData.map(({ iso2, name, confirmed, recovered, deaths, active }, index) => {
+            {sortedData.map(({ iso2, name, confirmed, recovered, deaths, active, countryColor }, index) => {
               const isItemSelected = selected === iso2;
 
               return (
@@ -159,6 +170,7 @@ function InfoTable({ data, selected, setSelected, handleClick }) {
                   id={`row-${iso2}`}
                   selected={isItemSelected}
                   className={isItemSelected ? 'active' : ''}
+                  data-color={countryColor}
                 >
                   {columns.map(({ id, align, label, render }) => (
                     <TableCell key={id + iso2} align={align}>

@@ -1,24 +1,10 @@
 import React, { useEffect } from 'react';
 import Loader from '@src/components/Loader';
-import { population } from '@src/common/population';
 import Map from './Map';
 
-const activeColor = [
-  '#423D46',
-  '#4D414B',
-  '#52414B',
-  '#59353f',
-  '#633842',
-  '#7a2d37',
-  '#9c2630',
-  '#bd1e28',
-  '#de1621',
-  '#ff0000',
-];
-const recoveredColor = ['#639178', '#6AAD7E', '#3FBF66'];
 // const activePercent = [0, 0.01, 0.1, 1, 5, 10, 25, 50, 75, 100, 200]; // deaths
-const activePercent = [0, 5, 10, 20, 40, 60, 80, 100, 500, 900];
-const recoveredPercent = [55, 70, 85];
+// const activePercent = [0, 5, 10, 20, 40, 60, 80, 100, 500, 900];
+// const recoveredPercent = [55, 70, 85];
 
 function Countries({
   allData: { confirmed: confirmedAll, recovered: recoveredAll, deaths: deathsAll, active: activeAll },
@@ -32,42 +18,12 @@ function Countries({
     const mapSvgCountries = document.querySelectorAll('.map svg path');
     mapSvgCountries.forEach((el) => {
       const countryData = data?.find((d) => d.iso2 === el.getAttribute('id'));
-      if (countryData && population[countryData.iso2]?.population) {
-        const countryPercent = (countryData.active * 1000000) / population[countryData.iso2]?.population;
-        const countryRecPercent = (countryData.recovered * 100) / (countryData.confirmed - countryData.deaths);
-        const description = `<span>${countryData.name}<br />${countryData.active} active, ${countryPercent.toFixed(
-          0
-        )} per million / ${countryData.deaths} deaths / ${countryData.recovered} recovered / ${
-          countryData.confirmed
-        } confirmed</span>`;
-        let countryColor = '0';
-        for (let i = 1; i < activePercent.length; i++) {
-          if (countryPercent > activePercent[i - 1] && countryPercent <= activePercent[i]) {
-            // countryColor = activeColor[i - 1];
-            countryColor = i - 1;
-          }
-        }
-        if (countryPercent >= activePercent[activePercent.length - 1])
-          // countryColor = activeColor[activeColor.length - 1];
-          countryColor = activeColor.length - 1;
+      if (countryData?.population) {
+        const { activeDescription, countryColor } = countryData;
 
-        el.innerHTML = description;
-
-        for (let i = 1; i < recoveredPercent.length; i++) {
-          if (countryRecPercent > recoveredPercent[i - 1] && countryRecPercent <= recoveredPercent[i]) {
-            countryColor = i - 1 + 10;
-          }
-        }
-        if (countryRecPercent >= recoveredPercent[recoveredPercent.length - 1]) {
-          countryColor = recoveredColor.length - 1 + 10;
-        }
-        if (selected === countryData.iso2) {
-          // countryColor = '#FF9966';
-          el.setAttribute('data-active', 'active');
-        } else {
-          el.setAttribute('data-active', '');
-        }
+        selected === countryData.iso2 ? el.setAttribute('data-active', 'active') : el.setAttribute('data-active', '');
         el.setAttribute('data-color', countryColor);
+        el.innerHTML = activeDescription;
       } else {
         el.innerHTML = `<span>${el.getAttribute('title')}</span>`;
       }
