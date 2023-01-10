@@ -1,0 +1,18 @@
+name: Demo job
+on: [workflow_dispatch]
+jobs: 
+  update_packages: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Npm Install
+        run: npm ci
+      - name: Npm check
+        run: npm install -g npm-check-updates
+      - name: Npm check
+        run: npm install -g npm-check-updates
+      - name: NCU
+        run: ncu
+      - name: NCU -u
+        run: ncu -u
+        
