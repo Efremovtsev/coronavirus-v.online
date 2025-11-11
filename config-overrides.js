@@ -21,22 +21,7 @@ module.exports = function override(config, argv) {
     ...config.module,
     rules: [
       ...config.module.rules,
-      // first eslint check
-      {
-        test: /\.(js|jsx|mjs)$/,
-        enforce: 'pre',
-        include: SRC_DIR,
-        exclude: VENDORS_DIR,
-        use: [
-          {
-            loader: 'eslint-loader',
-            options: {
-              // cache: true,
-              formatter: require('eslint-formatter-pretty'),
-            },
-          },
-        ],
-      },
+      // eslint-loader removed - react-scripts 5 uses eslint-webpack-plugin instead
       {
         test: /\.(js|jsx|mjs)$/,
         include: SRC_DIR,
